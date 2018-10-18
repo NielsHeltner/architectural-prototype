@@ -1,7 +1,5 @@
 package sem.architecturalprototype.server;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,6 @@ public class Server implements IServer {
 
     @Override
     public boolean upload(IDataPoint dataPoint) {
-        Log.d("ap", "server upload received");
         classifier.classify(dataPoint, dataPoints);
         dataPoints.add(dataPoint);
 
