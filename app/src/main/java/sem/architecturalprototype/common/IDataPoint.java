@@ -6,9 +6,13 @@ package sem.architecturalprototype.common;
 public interface IDataPoint {
 
     double getLat();
+
     double getLon();
+
     double getSpeed();
+
     int getCellId();
+
     long getTimeStamp();
 
 }
