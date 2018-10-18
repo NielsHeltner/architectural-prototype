@@ -1,7 +1,9 @@
-package sem.architecturalprototype;
+package sem.architecturalprototype.client;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import sem.architecturalprototype.R;
 
 public class MainActivity extends AppCompatActivity {
 
