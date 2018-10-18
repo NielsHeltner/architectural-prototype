@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
                     String formattedTime = simpleDateFormat.format(new Date());
                     Log.d("ap", "time: " + formattedTime);
-                    sampleStatus.setText(getString(R.string.sample_status, formattedTime));
+                    sampleStatus.setText(getString(R.string.sample_status_sampling, formattedTime));
                 }
             }, 0, DUTY_CYCLE_INTERVAL, TimeUnit.SECONDS);
             isSampling = true;

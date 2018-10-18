@@ -2,6 +2,7 @@
     <string name="app_name">Architectural Prototype</string>
     <string name="button_text_start">Start sampling</string>
     <string name="button_text_sampling">Sampling</string>
-    <string name="sample_status">Last gathered sample: %1$s</string>
+    <string name="sample_status_not_sampling">No samples gathered yet</string>
+    <string name="sample_status_sampling">Last gathered sample: %1$s</string>
     <string name="sample_rate">Sample rate: %1$d</string>
 </resources>
