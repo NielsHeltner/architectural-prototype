@@ -6,8 +6,8 @@ public interface IServer {
      * Upload an IDataPoint to the server for processing
      *
      * @param dataPoint the newest IDataPoint to be processed
-     * @return whether the process was successful or not
+     * @return the amount of data points uploaded to the server
      */
-    boolean upload(IDataPoint dataPoint);
+    int upload(IDataPoint dataPoint);
 
 }

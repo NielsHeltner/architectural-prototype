@@ -18,11 +18,11 @@ public class Server implements IServer {
     }
 
     @Override
-    public boolean upload(IDataPoint dataPoint) {
+    public int upload(IDataPoint dataPoint) {
         classifier.classify(dataPoint, dataPoints);
         dataPoints.add(dataPoint);
 
-        return true;
+        return dataPoints.size();
     }
 
     /**

@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int DUTY_CYCLE_INTERVAL = 3;
 
-    private TextView sampleStatus;
     private Button sampleButton;
+    private TextView sampleStatus;
+    private TextView sampleSize;
 
     private IServer server;
     private ILocationSampler locationSampler;
@@ -36,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((TextView) findViewById(R.id.sampleRate)).setText(getString(R.string.sample_rate, DUTY_CYCLE_INTERVAL));
-        sampleStatus = findViewById(R.id.sampleStatus);
-        sampleButton = findViewById(R.id.sampleButton);
+        initializeViews();
 
         executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
@@ -54,12 +53,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Log.d("ap", "run");
-                    server.upload(locationSampler.sampleLocation());
+                    int dataPointsCount = server.upload(locationSampler.sampleLocation());
 
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
                     String formattedTime = simpleDateFormat.format(new Date());
                     Log.d("ap", "time: " + formattedTime);
                     sampleStatus.setText(getString(R.string.sample_status_sampling, formattedTime));
+                    sampleSize.setText(getString(R.string.sample_size, dataPointsCount));
                 }
             }, 0, DUTY_CYCLE_INTERVAL, TimeUnit.SECONDS);
             isSampling = true;
@@ -82,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
      */
     public void setLocationSampler(ILocationSampler locationSampler) {
         this.locationSampler = locationSampler;
+    }
+
+    private void initializeViews() {
+        ((TextView) findViewById(R.id.sampleRate)).setText(getString(R.string.sample_rate, DUTY_CYCLE_INTERVAL));
+        sampleButton = findViewById(R.id.sampleButton);
+        sampleStatus = findViewById(R.id.sampleStatus);
+        sampleSize = findViewById(R.id.sampleSize);
     }
 
 }
