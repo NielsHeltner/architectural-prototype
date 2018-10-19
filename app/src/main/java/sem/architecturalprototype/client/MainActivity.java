@@ -2,7 +2,6 @@ package sem.architecturalprototype.client;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,13 +51,9 @@ public class MainActivity extends AppCompatActivity {
             executorService.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("ap", "run");
                     int dataPointsCount = server.upload(locationSampler.sampleLocation());
 
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
-                    String formattedTime = simpleDateFormat.format(new Date());
-                    Log.d("ap", "time: " + formattedTime);
-                    sampleStatus.setText(getString(R.string.sample_status_sampling, formattedTime));
+                    sampleStatus.setText(getString(R.string.sample_status_sampling, getCurrentTimeFormatted()));
                     sampleSize.setText(getString(R.string.sample_size, dataPointsCount));
                 }
             }, 0, DUTY_CYCLE_INTERVAL, TimeUnit.SECONDS);
@@ -89,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         sampleButton = findViewById(R.id.sampleButton);
         sampleStatus = findViewById(R.id.sampleStatus);
         sampleSize = findViewById(R.id.sampleSize);
+    }
+
+    private String getCurrentTimeFormatted() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
+        return simpleDateFormat.format(new Date());
     }
 
 }
